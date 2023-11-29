@@ -1,0 +1,3 @@
+[submodule "thirdparty/bantam"]
+	path = thirdparty/bantam
+	url = https://github.com/munificent/bantam
