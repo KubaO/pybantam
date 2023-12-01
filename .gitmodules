@@ -1,3 +1,6 @@
 [submodule "thirdparty/bantam"]
 	path = thirdparty/bantam
 	url = https://github.com/munificent/bantam
+[submodule "thirdparty/java2python"]
+	path = thirdparty/java2python
+	url = https://github.com/OliverKohlDSc/java2python
