@@ -1,14 +1,8 @@
-__all__ = [
-    'ParseException',
-    'Precedence',
-    'InfixParselet',
-    'PrefixParselet',
-    'Parser',
-]
+__all__ = ['ParseException', 'Precedence', 'InfixParselet', 'PrefixParselet', 'Parser',]
 
 from abc import ABC, abstractmethod
 from collections.abc import Iterator
-from enum import Enum
+from enum import Enum, unique
 from tokens import Token, TokenType
 from expressions import Expression
 
@@ -22,6 +16,7 @@ class ParseException(RuntimeError):
         return self.args[0]
 
 
+@unique
 class Precedence(Enum):
     """Defines the different precedence levels used by the infix parsers.
 
@@ -30,7 +25,7 @@ class Precedence(Enum):
     precedence than "+" and "-". Here, bigger numbers mean higher precedence.
     """
 
-    # // Ordered in increasing precedence.
+    # In order of increasing precedence.
     BELOW_ASSIGNMENT = 0
     ASSIGNMENT = 1
     CONDITIONAL = 2

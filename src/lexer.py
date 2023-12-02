@@ -18,12 +18,12 @@ class Lexer(Iterator[Token]):
     def __init__(self, text: str):
         """Creates a new Lexer to tokenize the given string.
 
-        text -- the tring to tokenize
+        text -- the string to tokenize
         """
         super().__init__()
         self.index = 0
         self.text = text
-        self.punctuators = {}
+        self.punctuators: dict[str, TokenType] = {}
         # Register all of the TokenTypes that are explicit punctuators.
         for _type in TokenType:
             punctuator = _type.punctuator
@@ -52,5 +52,4 @@ class Lexer(Iterator[Token]):
         # parser's lookahead doesn't have to worry about running out of tokens.
         return Token(TokenType.EOF, "")
 
-    def remove(self) -> None:
-        raise NotImplementedError()
+
