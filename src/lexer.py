@@ -1,6 +1,7 @@
 __all__ = ['Lexer']
 
 from collections.abc import Iterator
+
 from tokens import Token, TokenType
 
 
@@ -51,5 +52,3 @@ class Lexer(Iterator[Token]):
         # just keep returning them as many times as we're asked so that the
         # parser's lookahead doesn't have to worry about running out of tokens.
         return Token(TokenType.EOF, "")
-
-

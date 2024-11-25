@@ -3,8 +3,8 @@ __all__ = ['AssignParselet', 'BinaryOperatorParselet', 'CallParselet', 'Conditio
            # from Parser
            'InfixParselet', 'PrefixParselet']
 
-from parser import InfixParselet, PrefixParselet, Parser, Precedence, ParseException
 from expressions import *
+from parser import InfixParselet, PrefixParselet, Parser, Precedence, ParseException
 from tokens import Token, TokenType
 
 
@@ -18,7 +18,7 @@ class AssignParselet(InfixParselet):
 
     def parse(self, parser: Parser, left: Expression, token: Token):
         right = parser.parse_expression(Precedence.BELOW_ASSIGNMENT)
-        if not isinstance(left, (NameExpression, )):
+        if not isinstance(left, (NameExpression,)):
             raise ParseException(
                 "The left-hand side of an assignment must be a name.")
         name = left.name

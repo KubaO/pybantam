@@ -1,8 +1,8 @@
 __all__ = ['BantamParser']
 
+from lexer import Lexer
 from parselets import *
 from parser import Parser, Precedence
-from lexer import Lexer
 from tokens import TokenType
 
 

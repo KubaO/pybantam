@@ -1,6 +1,5 @@
 __all__ = ['TokenType', 'Token']
 
-
 from enum import Enum, unique
 from typing import NamedTuple
 

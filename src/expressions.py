@@ -1,8 +1,9 @@
 __all__ = ['Expression', 'AssignExpression', 'CallExpression', 'ConditionalExpression',
-           'NameExpression', 'OperatorExpression', 'PostfixExpression', 'PrefixExpression',]
+           'NameExpression', 'OperatorExpression', 'PostfixExpression', 'PrefixExpression', ]
 
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
+
 from tokens import TokenType
 
 

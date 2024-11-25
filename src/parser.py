@@ -1,10 +1,11 @@
-__all__ = ['ParseException', 'Precedence', 'InfixParselet', 'PrefixParselet', 'Parser',]
+__all__ = ['ParseException', 'Precedence', 'InfixParselet', 'PrefixParselet', 'Parser', ]
 
 from abc import ABC, abstractmethod
 from collections.abc import Iterator
 from enum import Enum, unique
-from tokens import Token, TokenType
+
 from expressions import Expression
+from tokens import Token, TokenType
 
 
 class ParseException(RuntimeError):
