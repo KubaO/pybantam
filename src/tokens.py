@@ -1,52 +1,36 @@
 __all__ = ['TokenType', 'Token']
 
-from enum import Enum, unique
+from enum import Enum
 from typing import NamedTuple
 
 
-@unique
 class TokenType(Enum):
-    LEFT_PAREN = 'LEFT_PAREN'
-    RIGHT_PAREN = 'RIGHT_PAREN'
-    COMMA = 'COMMA'
-    ASSIGN = 'ASSIGN'
-    PLUS = 'PLUS'
-    MINUS = 'MINUS'
-    ASTERISK = 'ASTERISK'
-    SLASH = 'SLASH'
-    CARET = 'CARET'
-    TILDE = 'TILDE'
-    BANG = 'BANG'
-    QUESTION = 'QUESTION'
-    COLON = 'COLON'
-    NAME = 'NAME'
-    EOF = 'EOF'
+    LEFT_PAREN = '('
+    RIGHT_PAREN = ')'
+    COMMA = ','
+    ASSIGN = '='
+    PLUS = '+'
+    MINUS = '-'
+    ASTERISK = '*'
+    SLASH = '/'
+    CARET = '^'
+    TILDE = '~'
+    BANG = '!'
+    QUESTION = '?'
+    COLON = ':'
+    NAME = (r'\w+',)
+    EOF = (r'$',)
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}.{self.name}"
 
     @property
-    def punctuator(self) -> str | None:
-        """Gets the text of a punctuator token.
-
-        If the TokenType represents a punctuator (i.e. a token that can split an
-        identifier like '+'), this will get its text.
+    def is_punctuator(self) -> bool:
         """
-        return _punctuators.get(self, None)
-
-
-_punctuators = {
-    TokenType.LEFT_PAREN: '(',
-    TokenType.RIGHT_PAREN: ')',
-    TokenType.COMMA: ',',
-    TokenType.ASSIGN: '=',
-    TokenType.PLUS: '+',
-    TokenType.MINUS: '-',
-    TokenType.ASTERISK: '*',
-    TokenType.SLASH: '/',
-    TokenType.CARET: '^',
-    TokenType.TILDE: '~',
-    TokenType.BANG: '!',
-    TokenType.QUESTION: '?',
-    TokenType.COLON: ':',
-}
+        Returns whether the token is a punctuator, i.e. a token that can split
+        an identifier like '+'.
+        """
+        return isinstance(self.value, str)
 
 
 class Token(NamedTuple):

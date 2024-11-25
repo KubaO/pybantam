@@ -68,7 +68,7 @@ class OperatorExpression(Expression):
     right: Expression
 
     def __str__(self):
-        return f"({self.left} {self.operator.punctuator} {self.right})"
+        return f"({self.left} {self.operator.value} {self.right})"
 
 
 @dataclass(frozen=True)
@@ -79,7 +79,7 @@ class PostfixExpression(Expression):
     operator: TokenType
 
     def __str__(self):
-        return f"({self.left}{self.operator.punctuator})"
+        return f"({self.left}{self.operator.value})"
 
 
 @dataclass(frozen=True)
@@ -90,4 +90,4 @@ class PrefixExpression(Expression):
     right: Expression
 
     def __str__(self):
-        return f"({self.operator.punctuator}{self.right})"
+        return f"({self.operator.value}{self.right})"

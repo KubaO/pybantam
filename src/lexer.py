@@ -26,10 +26,9 @@ class Lexer(Iterator[Token]):
         self.text = text
         self.punctuators: dict[str, TokenType] = {}
         # Register all the TokenTypes that are explicit punctuators.
-        for _type in TokenType:
-            punctuator = _type.punctuator
-            if punctuator is not None:
-                self.punctuators[punctuator] = _type
+        for tt in TokenType:
+            if tt.is_punctuator:
+                self.punctuators[tt.value] = tt
 
     def __next__(self) -> Token:
         while self.index < len(self.text):
