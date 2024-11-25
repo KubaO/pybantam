@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 __all__ = ['ParseException', 'Precedence', 'InfixParselet', 'PrefixParselet', 'Parser', ]
 
 from abc import ABC, abstractmethod
@@ -37,10 +39,10 @@ class Precedence(Enum):
     POSTFIX = 7
     CALL = 8
 
-    def one_lower(self) -> 'Precedence':
+    def one_lower(self) -> Precedence:
         return Precedence(self.value - 1)
 
-    def __lt__(self, other: 'Precedence'):
+    def __lt__(self, other: Precedence):
         return self.value < other.value
 
 
@@ -55,7 +57,7 @@ class InfixParselet(ABC):
     """
 
     @abstractmethod
-    def parse(self, parser: 'Parser', left: Expression,
+    def parse(self, parser: Parser, left: Expression,
               token: Token) -> Expression:
         pass
 
@@ -76,7 +78,7 @@ class PrefixParselet(ABC):
     """
 
     @abstractmethod
-    def parse(self, parser: 'Parser', token: Token) -> Expression:
+    def parse(self, parser: Parser, token: Token) -> Expression:
         pass
 
 
