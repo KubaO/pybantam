@@ -124,7 +124,7 @@ class NameParselet(PrefixParselet):
 
 
 class PrefixOperatorParselet(PrefixParselet):
-    """Generic prefix parselet for an unary arithmetic operator.
+    """Generic prefix parselet for a unary arithmetic operator.
 
     Parses prefix unary "-", "+", "~", and "!" expressions.
     """

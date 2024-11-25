@@ -28,7 +28,7 @@ class TokenType(Enum):
         """Gets the text of a punctuator token.
 
         If the TokenType represents a punctuator (i.e. a token that can split an
-        identifier like '+', this will get its text.
+        identifier like '+'), this will get its text.
         """
         return _punctuators.get(self, None)
 

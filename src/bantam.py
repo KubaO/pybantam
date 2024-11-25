@@ -11,7 +11,7 @@ class BantamParser(Parser):
 
     def __init__(self, lexer: Lexer):
         super().__init__(lexer)
-        # Register all of the parselets for the grammar.
+        # Register all the parselets for the grammar.
         # Register the ones that need special parselets.
         self.register(TokenType.NAME, NameParselet())
         self.register(TokenType.ASSIGN, AssignParselet())

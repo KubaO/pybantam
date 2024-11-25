@@ -24,7 +24,7 @@ class Lexer(Iterator[Token]):
         self.index = 0
         self.text = text
         self.punctuators: dict[str, TokenType] = {}
-        # Register all of the TokenTypes that are explicit punctuators.
+        # Register all the TokenTypes that are explicit punctuators.
         for _type in TokenType:
             punctuator = _type.punctuator
             if punctuator is not None:
@@ -48,7 +48,7 @@ class Lexer(Iterator[Token]):
                 return Token(TokenType.NAME, name)
             # Ignore all other characters (whitespace, etc.)
         # Once we've reached the end of the string, just return EOF tokens. We'll
-        # just keeping returning them as many times as we're asked so that the
+        # just keep returning them as many times as we're asked so that the
         # parser's lookahead doesn't have to worry about running out of tokens.
         return Token(TokenType.EOF, "")
 
