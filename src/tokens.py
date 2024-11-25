@@ -1,5 +1,6 @@
-__all__ = ['TokenType', 'Token']
+__all__ = ['TokenType', 'Token', 'TOKEN_PATTERNS']
 
+import re
 from enum import Enum
 from typing import NamedTuple
 
@@ -25,12 +26,12 @@ class TokenType(Enum):
         return f"{self.__class__.__name__}.{self.name}"
 
     @property
-    def is_punctuator(self) -> bool:
-        """
-        Returns whether the token is a punctuator, i.e. a token that can split
-        an identifier like '+'.
-        """
-        return isinstance(self.value, str)
+    def re(self) -> str:
+        """Gets the regular expression that matches this token"""
+        if isinstance(self.value, str):
+            return re.escape(self.value)
+        else:
+            return self.value[0]
 
 
 class Token(NamedTuple):
@@ -41,3 +42,6 @@ class Token(NamedTuple):
 
     def __str__(self):
         return self.text
+
+
+TOKEN_PATTERNS = {tt: tt.re for tt in TokenType}

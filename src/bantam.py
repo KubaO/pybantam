@@ -1,15 +1,16 @@
 __all__ = ['BantamParser']
 
-from lexer import Lexer
+from collections.abc import Iterable
+
 from parselets import *
 from parser import Parser, Precedence
-from tokens import TokenType
+from tokens import TokenType, Token
 
 
 class BantamParser(Parser):
     """Extends the generic Parser class with support for parsing the actual Bantam grammar."""
 
-    def __init__(self, lexer: Lexer):
+    def __init__(self, lexer: Iterable[Token]):
         super().__init__(lexer)
         # Register all the parselets for the grammar.
         # Register the ones that need special parselets.

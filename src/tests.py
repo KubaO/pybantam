@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from bantam import BantamParser
-from lexer import Lexer
+from lexer import lex
 
 passed = 0
 failed = 0
@@ -11,8 +11,8 @@ def test(source: str, expected: str):
     """Parses the given chunk of code and verifies that it matches the expected pretty-printed
     result."""
     global failed, passed
-    lexer = Lexer(source)
-    parser = BantamParser(lexer)
+    tokens = lex(source)
+    parser = BantamParser(tokens)
     try:
         result = parser.parse_expression()
     except RuntimeError as ex:

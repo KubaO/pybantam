@@ -1,7 +1,7 @@
 __all__ = ['ParseException', 'Precedence', 'InfixParselet', 'PrefixParselet', 'Parser', ]
 
 from abc import ABC, abstractmethod
-from collections.abc import Iterator
+from collections.abc import Iterable
 from enum import Enum, unique
 
 from expressions import Expression
@@ -81,8 +81,8 @@ class PrefixParselet(ABC):
 
 
 class Parser:
-    def __init__(self, tokens: Iterator[Token]):
-        self.tokens = tokens
+    def __init__(self, tokens: Iterable[Token]):
+        self.tokens = iter(tokens)
         self.read: list[Token] = []
         self.prefix_parselets: dict[TokenType, PrefixParselet] = {}
         self.infix_parselets: dict[TokenType, InfixParselet] = {}
