@@ -27,8 +27,9 @@ def lex(text: str) -> Iterable[Token]:
     """
 
     for match in _scanner.finditer(text):
-        i, value = next(filter(lambda ir: ir[1] is not None, enumerate(match.groups())))
-        type_ = _pattern_keys[i]
+        i = match.lastindex
+        value = match[i]
+        type_ = _pattern_keys[i-1]
         yield Token(type_, value)
 
     # The above loop will yield one EOF token. We'll
