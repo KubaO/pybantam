@@ -1,20 +1,15 @@
 __all__ = ['lex']
 
-import re
 from collections.abc import Iterable
 
-from tokens import Token, TokenType, TOKEN_PATTERNS
-
-_scanner = re.compile(
-    "|".join(f"(?P<{token.name}>{patt})" for token, patt in TOKEN_PATTERNS.items())
-)
-# The scanner uses the regular expression engine.
-# Each token type is captured into a group with its name.
-# The groups are in the order of TokenType enumerations.
-# The regular expression reads: r'(?P<LEFT_PAREN>\()|(?P<RIGHT_PAREN>\))|' ... '(?P<EOF>$)'
+from tokens import Token, TokenType, SCANNER, PATTERN_KEYS
 
 
-_pattern_keys: list[TokenType] = list(TOKEN_PATTERNS.keys())
+def _match_to_token(match) -> Token:
+    i = match.lastindex
+    value = match[i]
+    type_ = PATTERN_KEYS[i]
+    return Token(type_, value)
 
 
 def lex(text: str) -> Iterable[Token]:
@@ -22,17 +17,14 @@ def lex(text: str) -> Iterable[Token]:
     A simple lexer that yields tokens.
 
     Takes a string and splits it into a series of Tokens.
-    Numbers and strings are not supported. This is really just the bare
+    Numbers and string literals are not supported. This is really just the bare
     minimum to give the parser something to work with.
     """
 
-    for match in _scanner.finditer(text):
-        i = match.lastindex
-        value = match[i]
-        type_ = _pattern_keys[i-1]
-        yield Token(type_, value)
+    yield from map(_match_to_token, SCANNER.finditer(text))
 
     # The above loop will yield one EOF token. We'll
     # just keep returning them as many times as we're asked so that the
     # parser's lookahead doesn't have to worry about running out of tokens.
-    yield Token(TokenType.EOF, "")
+    while True:
+        yield Token(TokenType.EOF, "")
